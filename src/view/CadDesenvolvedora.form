@@ -28,7 +28,6 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabelGuia" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonCadastrar" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabelData" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -36,9 +35,11 @@
                           <Component id="jLabelFramework" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabelPais" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabelNome" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonCadastrar" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextFieldNome" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextFieldPais" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextFieldFrameworks" min="-2" max="-2" attributes="0"/>
@@ -47,7 +48,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="162" max="32767" attributes="0"/>
+              <EmptySpace pref="158" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -82,7 +83,10 @@
                   <Component id="jTextFieldFrameworks" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jButtonCadastrar" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jButtonCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace pref="31" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -159,6 +163,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCadastrarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ler"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

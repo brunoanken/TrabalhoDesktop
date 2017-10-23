@@ -1,0 +1,2 @@
+nome,país,data,bibliotecas,frameworks
+Google,país,data,bibliotecas,frameworks

@@ -7,6 +7,8 @@ package view;
 
 import controller.DesenvolvedoraDAO;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Desenvolvedora;
 
 /**
@@ -43,6 +45,7 @@ public class CadDesenvolvedora extends javax.swing.JFrame {
         jTextFieldBibliotecas = new javax.swing.JTextField();
         jTextFieldFrameworks = new javax.swing.JTextField();
         jButtonCadastrar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setLocationByPlatform(true);
@@ -91,6 +94,13 @@ public class CadDesenvolvedora extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Ler");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -99,22 +109,23 @@ public class CadDesenvolvedora extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelGuia)
-                    .addComponent(jButtonCadastrar)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelData)
                             .addComponent(jLabelBiblioteca)
                             .addComponent(jLabelFramework)
                             .addComponent(jLabelPais)
-                            .addComponent(jLabelNome))
+                            .addComponent(jLabelNome)
+                            .addComponent(jButtonCadastrar))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
                             .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextFieldPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextFieldFrameworks, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextFieldBibliotecas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextFieldFundacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addContainerGap(158, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,7 +153,9 @@ public class CadDesenvolvedora extends javax.swing.JFrame {
                     .addComponent(jLabelFramework)
                     .addComponent(jTextFieldFrameworks, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButtonCadastrar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonCadastrar)
+                    .addComponent(jButton1))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
@@ -166,6 +179,15 @@ public class CadDesenvolvedora extends javax.swing.JFrame {
         dev.setBibliotecas(jTextFieldBibliotecas.getText());
         dev.setFrameworks(jTextFieldFrameworks.getText());
         
+        DesenvolvedoraDAO devDao = new DesenvolvedoraDAO();
+        
+        try{
+            System.out.println("Escrevendo em arquivo de texto");
+            devDao.criarArquivo(dev);
+        } catch (IOException erro){
+            System.out.println(erro);
+        }
+        
         //DesenvolvedoraDAO devDao = new DesenvolvedoraDAO();
 //        try {
 //            devDao.create(dev);
@@ -182,12 +204,23 @@ public class CadDesenvolvedora extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldFrameworksActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        DesenvolvedoraDAO dev = new DesenvolvedoraDAO();
+        
+        try {
+            dev.read();
+        } catch (IOException ex) {
+            Logger.getLogger(CadDesenvolvedora.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonCadastrar;
     private javax.swing.JLabel jLabelBiblioteca;
     private javax.swing.JLabel jLabelData;

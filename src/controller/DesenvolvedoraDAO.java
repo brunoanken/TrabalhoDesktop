@@ -7,30 +7,65 @@ import model.Desenvolvedora;
 
 public class DesenvolvedoraDAO {
     
-    //gravação de arquivo texto
-    
-    
+    //gravação de arquivo texto    
     private ArrayList<Desenvolvedora> devs = new ArrayList<Desenvolvedora>();
-    private File fileDev = new File("devs.txt");
+    private File fileDev = new File("desenvolvedoras.txt");
     
-       public void create(Desenvolvedora dev) throws IOException{ //correto é colocar try-catch e a função ser void
-       for(int i=0; i<devs.size(); i++){
-           if(devs.get(i).getName() == dev.getName()){
-               throw new IOException();
-           }
+    //cria, verifica e grava os dados no arquivo
+    public void criarArquivo(Desenvolvedora dev) throws IOException{
+        
+        //realiza a leitura do conteúdo do arquivo
+        this.read();
+        
+        try {
+            for(int i = 0; i < devs.size(); i++){
+                if(devs.get(i).getName().equals(dev.getName())){
+                    //limpa o arraylist
+                    devs.clear();
+                    //se há erro, joga a exceção
+                    throw new IOException(); 
+                }
+            }
+            //limpa o arraylist
+            devs.clear();
+            //adiciona o objeto dev (caso não haja erro) no array devs
+            devs.add(dev);
+            //grava o array no arquivo texto
+            gravar(devs);
+            //limpa o arraylist
+            devs.clear();
+            
+        } catch(IOException erro) {
+            System.out.println(erro);
+        }
+    }
+    
+    //Grava os dados no arquivo texto
+    public void gravar(ArrayList<Desenvolvedora> devs) throws IOException{
+       
+       FileWriter escritor = new FileWriter(fileDev, true);
+       BufferedWriter escritorBuff = new BufferedWriter(escritor);
+       
+       for(int i = 0; i<devs.size(); i++){
+            escritorBuff.write(
+                devs.get(i).getName()+","+
+                devs.get(i).getOrigin()+","+
+                devs.get(i).getFoundation()+","+
+                devs.get(i).getBibliotecas()+","+
+                devs.get(i).getFrameworks()+"\n");
        }
+        escritorBuff.flush();
+        escritorBuff.close();
+    }
+    
        
-       devs.add(dev);
-       gravar(devs);
-   }
-       
-       public void read() throws FileNotFoundException, IOException{
-           
-        File arquivo = new File("devs.txt");
+    public void read() throws FileNotFoundException, IOException{
+
+        File arquivo = new File("desenvolvedoras.txt");
         FileReader leitor = new FileReader(arquivo);
         BufferedReader leitorBuff = new BufferedReader(leitor);
         String line;
-        
+
         while((line = leitorBuff.readLine())!=null){
             String [] devs = line.split(",");
             Desenvolvedora dev = new Desenvolvedora();
@@ -43,30 +78,18 @@ public class DesenvolvedoraDAO {
         }
         leitorBuff.close();
         
+        System.out.println("Leitura das desenvolvedoras já gravadas.\n");
         for(int i=0; i<this.devs.size(); i++){
-            System.out.println("Nome: " + this.devs.get(i).getName()+
+            System.out.println(                    
+                    "Nome: " + this.devs.get(i).getName()+
                     ", País de origem: " + this.devs.get(i).getOrigin()+
                     ", Data de fundação: " + this.devs.get(i).getFoundation()+
                     ", Bibliotecas produzidas: " + this.devs.get(i).getBibliotecas()+
                     ", Frameworks produzidos: " + this.devs.get(i).getFrameworks());
         }
-   }
-       
-   public void gravar(ArrayList<Desenvolvedora> devs) throws IOException{
-       
-       FileWriter escritor = new FileWriter(fileDev, true);
-       BufferedWriter escritorBuff = new BufferedWriter(escritor);
-       
-       for(int i=0; i<devs.size(); i++){
-            escritorBuff.write(devs.get(i).getName()+","+
-                devs.get(i).getOrigin()+","+
-                devs.get(i).getFoundation()+","+
-                devs.get(i).getBibliotecas()+","+
-                devs.get(i).getFrameworks()+"\n");
-       }
-        escritorBuff.flush();
-        escritorBuff.close();
     }
+       
+   
    
    //binário
    
