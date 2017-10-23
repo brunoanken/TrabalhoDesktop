@@ -129,12 +129,6 @@ public class CadBIblioteca extends javax.swing.JFrame {
         bib.setLanguages(jTextFieldLinguagens.getText());
         bib.setTipo("Biblioteca");
         
-        System.out.println(bib.getName());
-        System.out.println(bib.getRelease());
-        System.out.println(bib.getStable());
-        System.out.println(bib.getLanguages());
-        System.out.println(bib.getTipo());
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
