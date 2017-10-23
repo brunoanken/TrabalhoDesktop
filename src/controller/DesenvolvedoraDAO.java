@@ -7,6 +7,8 @@ import model.Desenvolvedora;
 
 public class DesenvolvedoraDAO {
     
+    //gravação de arquivo texto
+    
     
     private ArrayList<Desenvolvedora> devs = new ArrayList<Desenvolvedora>();
     private File fileDev = new File("devs.txt");
@@ -68,96 +70,96 @@ public class DesenvolvedoraDAO {
    
    //binário
    
-       public static ObjectOutputStream CriaEscritorBinario(File arquivo, boolean append) {
-        ObjectOutputStream out = null;
-
-        try {
-            //FileOutputStream fos = new FileOutputStream(arquivo, append);
-            //out = new ObjectOutputStream(fos);
-            
-            if (arquivo.exists()) {
-                FileOutputStream fos = new FileOutputStream(arquivo, append);
-                out = new ObjectOutputStream(fos) {
-                    @Override
-                    protected void writeStreamHeader() {
-                        // do not write a header
-                    }
-                };
-            } else {
-                FileOutputStream fos = new FileOutputStream(arquivo, append);
-                out = new ObjectOutputStream(fos);
-            }
-             
-        } catch (IOException erro) {
-            System.out.println("Erro ao criar arquivo. " + erro);
-        }
-        return out;
-       }
-       
-        public static ObjectInputStream CriaLeitorBinario(File arquivo) {
-            ObjectInputStream ois = null;
-            try {
-                FileInputStream fis = new FileInputStream(arquivo);
-                ois = new ObjectInputStream(fis);
-            } catch (IOException erro) {
-                System.out.println("Erro ao ler arquivo. " + erro);
-            }
-            return ois;
-        }
-        
-        public static void EscreveObjeto(ObjectOutputStream oos, Object obj, boolean flush) {
-        try {
-            oos.writeObject(obj);
-            if (flush) {
-                oos.flush();
-            }
-            System.out.println("Escrevendo objeto: " + obj.toString());
-            System.out.println("");
-        } catch (IOException erro) {
-            System.out.println("Erro na escrita. " + erro);
-        }
-    }
-        
-        public static Object LeObjeto(ObjectInputStream ois) {
-        Object objlido = null;
-        try {
-            objlido = ois.readObject();
-            System.out.println("Lendo objeto");
-        } catch (ClassNotFoundException erro) {
-            System.out.println("Classe nao encontrada. " + erro);
-        } catch (java.io.EOFException erro) {
-            System.out.println("Final de arquivo. " + erro);
-        } catch (IOException erro) {
-            System.out.println("Erro na leitura do objeto. " + erro);
-        } finally {
-            return objlido;
-        }
-    }
-        
-    public static void imprimeDev(Desenvolvedora dev) {
-        if (dev != null) {
-            System.out.println("Imprimindo dados.");
-            System.out.println(dev.toString());
-        } else {
-            System.out.println("Cliente nulo.");
-        }
-    }
-    
-    public static void principal(Desenvolvedora dev){
-        File arquivo = new File("e2.obj");
-        ObjectOutputStream escritor = CriaEscritorBinario(arquivo, true);
-        EscreveObjeto(escritor, dev, true);
-
-        ObjectInputStream leitor = CriaLeitorBinario(arquivo);
-        Desenvolvedora c4 = (Desenvolvedora) LeObjeto(leitor);
-        imprimeDev(c4);
-        
-        Desenvolvedora c5 = (Desenvolvedora) LeObjeto(leitor);
-        imprimeDev(c5);
-        
-        Desenvolvedora c6 = (Desenvolvedora) LeObjeto(leitor);
-        imprimeDev(c6);
-
-
-    }
+//       public static ObjectOutputStream CriaEscritorBinario(File arquivo, boolean append) {
+//        ObjectOutputStream out = null;
+//
+//        try {
+//            //FileOutputStream fos = new FileOutputStream(arquivo, append);
+//            //out = new ObjectOutputStream(fos);
+//            
+//            if (arquivo.exists()) {
+//                FileOutputStream fos = new FileOutputStream(arquivo, append);
+//                out = new ObjectOutputStream(fos) {
+//                    @Override
+//                    protected void writeStreamHeader() {
+//                        // do not write a header
+//                    }
+//                };
+//            } else {
+//                FileOutputStream fos = new FileOutputStream(arquivo, append);
+//                out = new ObjectOutputStream(fos);
+//            }
+//             
+//        } catch (IOException erro) {
+//            System.out.println("Erro ao criar arquivo. " + erro);
+//        }
+//        return out;
+//       }
+//       
+//        public static ObjectInputStream CriaLeitorBinario(File arquivo) {
+//            ObjectInputStream ois = null;
+//            try {
+//                FileInputStream fis = new FileInputStream(arquivo);
+//                ois = new ObjectInputStream(fis);
+//            } catch (IOException erro) {
+//                System.out.println("Erro ao ler arquivo. " + erro);
+//            }
+//            return ois;
+//        }
+//        
+//        public static void EscreveObjeto(ObjectOutputStream oos, Object obj, boolean flush) {
+//        try {
+//            oos.writeObject(obj);
+//            if (flush) {
+//                oos.flush();
+//            }
+//            System.out.println("Escrevendo objeto: " + obj.toString());
+//            System.out.println("");
+//        } catch (IOException erro) {
+//            System.out.println("Erro na escrita. " + erro);
+//        }
+//    }
+//        
+//        public static Object LeObjeto(ObjectInputStream ois) {
+//        Object objlido = null;
+//        try {
+//            objlido = ois.readObject();
+//            System.out.println("Lendo objeto");
+//        } catch (ClassNotFoundException erro) {
+//            System.out.println("Classe nao encontrada. " + erro);
+//        } catch (java.io.EOFException erro) {
+//            System.out.println("Final de arquivo. " + erro);
+//        } catch (IOException erro) {
+//            System.out.println("Erro na leitura do objeto. " + erro);
+//        } finally {
+//            return objlido;
+//        }
+//    }
+//        
+//    public static void imprimeDev(Desenvolvedora dev) {
+//        if (dev != null) {
+//            System.out.println("Imprimindo dados.");
+//            System.out.println(dev.toString());
+//        } else {
+//            System.out.println("Cliente nulo.");
+//        }
+//    }
+//    
+//    public static void principal(Desenvolvedora dev){
+//        File arquivo = new File("e2.obj");
+//        ObjectOutputStream escritor = CriaEscritorBinario(arquivo, true);
+//        EscreveObjeto(escritor, dev, true);
+//
+//        ObjectInputStream leitor = CriaLeitorBinario(arquivo);
+//        Desenvolvedora c4 = (Desenvolvedora) LeObjeto(leitor);
+//        imprimeDev(c4);
+//        
+//        Desenvolvedora c5 = (Desenvolvedora) LeObjeto(leitor);
+//        imprimeDev(c5);
+//        
+//        Desenvolvedora c6 = (Desenvolvedora) LeObjeto(leitor);
+//        imprimeDev(c6);
+//
+//
+//    }
 }
