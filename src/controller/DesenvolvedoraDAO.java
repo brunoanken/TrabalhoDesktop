@@ -32,8 +32,6 @@ public class DesenvolvedoraDAO {
             devs.add(dev);
             //grava o array no arquivo texto
             gravar(devs);
-            //limpa o arraylist
-            devs.clear();
             
         } catch(IOException erro) {
             System.out.println(erro);
