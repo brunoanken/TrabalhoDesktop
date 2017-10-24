@@ -2,6 +2,8 @@ package controller;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import model.Desenvolvedora;
 
@@ -12,10 +14,11 @@ public class DesenvolvedoraDAO {
     private File fileDev = new File("desenvolvedoras.txt");
     
     //cria, verifica e grava os dados no arquivo
+    //função utilizada pra criar uma nova entrada
     public void criarArquivo(Desenvolvedora dev) throws IOException{
         
         //realiza a leitura do conteúdo do arquivo
-        this.read();
+        this.ler();
         
         try {
             for(int i = 0; i < devs.size(); i++){
@@ -26,13 +29,10 @@ public class DesenvolvedoraDAO {
                     throw new IOException(); 
                 }
             }
-            //limpa o arraylist
-            devs.clear();
             //adiciona o objeto dev (caso não haja erro) no array devs
             devs.add(dev);
             //grava o array no arquivo texto
-            gravar(devs);
-            
+            gravar(devs);            
         } catch(IOException erro) {
             System.out.println(erro);
         }
@@ -41,10 +41,10 @@ public class DesenvolvedoraDAO {
     //Grava os dados no arquivo texto
     public void gravar(ArrayList<Desenvolvedora> devs) throws IOException{
        
-       FileWriter escritor = new FileWriter(fileDev, true);
+       FileWriter escritor = new FileWriter(fileDev, false);
        BufferedWriter escritorBuff = new BufferedWriter(escritor);
        
-       for(int i = 0; i<devs.size(); i++){
+       for(int i = 0; i < devs.size(); i++){
             escritorBuff.write(
                 devs.get(i).getName()+","+
                 devs.get(i).getOrigin()+","+
@@ -56,37 +56,56 @@ public class DesenvolvedoraDAO {
         escritorBuff.close();
     }
     
-       
-    public void read() throws FileNotFoundException, IOException{
+    //lê (DÃ) os dados no arquivo e imprime no console
+    public int ler() throws FileNotFoundException, IOException{
 
         File arquivo = new File("desenvolvedoras.txt");
         FileReader leitor = new FileReader(arquivo);
         BufferedReader leitorBuff = new BufferedReader(leitor);
         String line;
-
+        
         while((line = leitorBuff.readLine())!=null){
-            String [] devs = line.split(",");
+            String [] devs = line.split(",");            
             Desenvolvedora dev = new Desenvolvedora();
             dev.setName(devs[0]);
             dev.setOrigin(devs[1]);
             dev.setFoundation(devs[2]);
             dev.setBibliotecas(devs[3]);
             dev.setFrameworks(devs[4]);
-            this.devs.add(dev);   
+            this.devs.add(dev);
         }
         leitorBuff.close();
         
-        System.out.println("Leitura das desenvolvedoras já gravadas.\n");
-        for(int i=0; i<this.devs.size(); i++){
-            System.out.println(                    
-                    "Nome: " + this.devs.get(i).getName()+
-                    ", País de origem: " + this.devs.get(i).getOrigin()+
-                    ", Data de fundação: " + this.devs.get(i).getFoundation()+
-                    ", Bibliotecas produzidas: " + this.devs.get(i).getBibliotecas()+
-                    ", Frameworks produzidos: " + this.devs.get(i).getFrameworks());
-        }
+//        System.out.println("Leitura das empresas desenvolvedoras já gravadas.\n");
+//        for(int i = 0; i < this.devs.size(); i++){
+//            System.out.println(                    
+//                    "Nome: " + this.devs.get(i).getName()+
+//                    ", País de origem: " + this.devs.get(i).getOrigin()+
+//                    ", Data de fundação: " + this.devs.get(i).getFoundation()+
+//                    ", Bibliotecas produzidas: " + this.devs.get(i).getBibliotecas()+
+//                    ", Frameworks produzidos: " + this.devs.get(i).getFrameworks());
+//        }        
+        return this.devs.size();
     }
-       
+    
+    public String[][] retornaTexto(int tam) throws FileNotFoundException, IOException{
+        
+        File arquivo = new File("desenvolvedoras.txt");
+        FileReader leitor = new FileReader(arquivo);
+        BufferedReader leitorBuff = new BufferedReader(leitor);
+        String line;
+        String[][] temp = new String[tam][];
+        
+        int i = 0;
+        while((line = leitorBuff.readLine())!=null){
+             String [] devs = line.split(",");
+             
+             temp[i] = devs;
+             i++;
+        }
+        
+        return temp;
+    }
    
    
    //binário

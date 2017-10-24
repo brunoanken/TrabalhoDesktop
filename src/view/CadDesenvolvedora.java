@@ -205,10 +205,10 @@ public class CadDesenvolvedora extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldFrameworksActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        DesenvolvedoraDAO dev = new DesenvolvedoraDAO();
-        
+        DesenvolvedoraDAO devDao = new DesenvolvedoraDAO();
         try {
-            dev.read();
+            int tam = devDao.ler();
+            String a[][] = devDao.retornaTexto(tam);            
         } catch (IOException ex) {
             Logger.getLogger(CadDesenvolvedora.class.getName()).log(Level.SEVERE, null, ex);
         }

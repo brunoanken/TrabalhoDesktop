@@ -1,2 +1,3 @@
 nome,país,data,bibliotecas,frameworks
-Google,país,data,bibliotecas,frameworks
+Amém,Jerusalém,Natal,Cristo,Jesus
+Google,EUA,Hoje,None,Angular
