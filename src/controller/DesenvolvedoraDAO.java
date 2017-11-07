@@ -9,7 +9,8 @@ import model.Desenvolvedora;
 
 public class DesenvolvedoraDAO {
     
-    //gravação de arquivo texto    
+    //seção de gravação de arquivo texto    
+    
     private ArrayList<Desenvolvedora> devs = new ArrayList<Desenvolvedora>();
     private File fileDev = new File("desenvolvedoras.txt");
     
@@ -56,7 +57,7 @@ public class DesenvolvedoraDAO {
         escritorBuff.close();
     }
     
-    //lê (DÃ) os dados no arquivo e imprime no console
+    //lê (DÃ) os dados no arquivo
     public int ler() throws FileNotFoundException, IOException{
 
         File arquivo = new File("desenvolvedoras.txt");
@@ -76,15 +77,6 @@ public class DesenvolvedoraDAO {
         }
         leitorBuff.close();
         
-//        System.out.println("Leitura das empresas desenvolvedoras já gravadas.\n");
-//        for(int i = 0; i < this.devs.size(); i++){
-//            System.out.println(                    
-//                    "Nome: " + this.devs.get(i).getName()+
-//                    ", País de origem: " + this.devs.get(i).getOrigin()+
-//                    ", Data de fundação: " + this.devs.get(i).getFoundation()+
-//                    ", Bibliotecas produzidas: " + this.devs.get(i).getBibliotecas()+
-//                    ", Frameworks produzidos: " + this.devs.get(i).getFrameworks());
-//        }        
         return this.devs.size();
     }
     
