@@ -1,3 +1,3 @@
-JHOW,AI,meu,cu,zinho
+Facebook,UK,Antionti,React,none
 Google,EUA,Hoje,Google,Google
-Bruno,Anken,Moromizato,Bruno,Bruno
+Bruno,Anken,Moromizato,Zaninello,Bichão

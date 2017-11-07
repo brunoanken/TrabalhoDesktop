@@ -4,6 +4,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import model.Desenvolvedora;
 
@@ -99,100 +101,44 @@ public class DesenvolvedoraDAO {
         
         return temp;
     }
+    
+    
    
-   
+   // --**--
+    
    //binário
-   
-//       public static ObjectOutputStream CriaEscritorBinario(File arquivo, boolean append) {
-//        ObjectOutputStream out = null;
-//
-//        try {
-//            //FileOutputStream fos = new FileOutputStream(arquivo, append);
-//            //out = new ObjectOutputStream(fos);
-//            
-//            if (arquivo.exists()) {
-//                FileOutputStream fos = new FileOutputStream(arquivo, append);
-//                out = new ObjectOutputStream(fos) {
-//                    @Override
-//                    protected void writeStreamHeader() {
-//                        // do not write a header
-//                    }
-//                };
-//            } else {
-//                FileOutputStream fos = new FileOutputStream(arquivo, append);
-//                out = new ObjectOutputStream(fos);
-//            }
-//             
-//        } catch (IOException erro) {
-//            System.out.println("Erro ao criar arquivo. " + erro);
-//        }
-//        return out;
-//       }
-//       
-//        public static ObjectInputStream CriaLeitorBinario(File arquivo) {
-//            ObjectInputStream ois = null;
-//            try {
-//                FileInputStream fis = new FileInputStream(arquivo);
-//                ois = new ObjectInputStream(fis);
-//            } catch (IOException erro) {
-//                System.out.println("Erro ao ler arquivo. " + erro);
-//            }
-//            return ois;
-//        }
-//        
-//        public static void EscreveObjeto(ObjectOutputStream oos, Object obj, boolean flush) {
-//        try {
-//            oos.writeObject(obj);
-//            if (flush) {
-//                oos.flush();
-//            }
-//            System.out.println("Escrevendo objeto: " + obj.toString());
-//            System.out.println("");
-//        } catch (IOException erro) {
-//            System.out.println("Erro na escrita. " + erro);
-//        }
-//    }
-//        
-//        public static Object LeObjeto(ObjectInputStream ois) {
-//        Object objlido = null;
-//        try {
-//            objlido = ois.readObject();
-//            System.out.println("Lendo objeto");
-//        } catch (ClassNotFoundException erro) {
-//            System.out.println("Classe nao encontrada. " + erro);
-//        } catch (java.io.EOFException erro) {
-//            System.out.println("Final de arquivo. " + erro);
-//        } catch (IOException erro) {
-//            System.out.println("Erro na leitura do objeto. " + erro);
-//        } finally {
-//            return objlido;
-//        }
-//    }
-//        
-//    public static void imprimeDev(Desenvolvedora dev) {
-//        if (dev != null) {
-//            System.out.println("Imprimindo dados.");
-//            System.out.println(dev.toString());
-//        } else {
-//            System.out.println("Cliente nulo.");
-//        }
-//    }
-//    
-//    public static void principal(Desenvolvedora dev){
-//        File arquivo = new File("e2.obj");
-//        ObjectOutputStream escritor = CriaEscritorBinario(arquivo, true);
-//        EscreveObjeto(escritor, dev, true);
-//
-//        ObjectInputStream leitor = CriaLeitorBinario(arquivo);
-//        Desenvolvedora c4 = (Desenvolvedora) LeObjeto(leitor);
-//        imprimeDev(c4);
-//        
-//        Desenvolvedora c5 = (Desenvolvedora) LeObjeto(leitor);
-//        imprimeDev(c5);
-//        
-//        Desenvolvedora c6 = (Desenvolvedora) LeObjeto(leitor);
-//        imprimeDev(c6);
-//
-//
-//    }
+    
+    public void testeBinario(){
+        FileOutputStream fos;
+        Desenvolvedora dev = new Desenvolvedora();
+        dev.setName("A");
+        dev.setBibliotecas("Bib");
+        dev.setFoundation("Foundation");
+        dev.setFrameworks("Frame");
+        dev.setOrigin("Amanhã");
+        try {
+            fos = new FileOutputStream(new File("devs.obj"));
+            ObjectOutputStream out = new ObjectOutputStream(fos);
+            out.writeObject(dev);
+            
+            ObjectInputStream ois = null;
+            try{
+                FileInputStream fis = new FileInputStream(new File("devs.obj"));
+                ois = new ObjectInputStream(fis);
+                Desenvolvedora aux = (Desenvolvedora)ois.readObject();
+                System.out.println(aux.getBibliotecas());
+            } catch(FileNotFoundException ex) {
+                System.out.println("deu ruim ao ler o arquivo");
+            } catch (ClassNotFoundException ex) {
+                System.out.println("deu ruim ao ler o objeto");
+                Logger.getLogger(DesenvolvedoraDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DesenvolvedoraDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(DesenvolvedoraDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+
 }
