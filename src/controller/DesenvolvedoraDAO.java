@@ -88,6 +88,7 @@ public class DesenvolvedoraDAO {
         return this.devs.size();
     }
     
+    //retorna os dados gravados em forma de um object string
     public String[][] retornaTexto(int tam) throws FileNotFoundException, IOException{
         
         File arquivo = new File("desenvolvedoras.txt");

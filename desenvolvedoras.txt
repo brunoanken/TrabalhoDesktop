@@ -1,3 +1,4 @@
 nome,país,data,bibliotecas,frameworks
 Amém,Jerusalém,Natal,Cristo,Jesus
 Google,EUA,Hoje,None,Angular
+Bruno,Anken,Moromizato,Zaninello,Agosto
