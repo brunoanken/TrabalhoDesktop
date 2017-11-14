@@ -1,0 +1,2 @@
+A,Data Linguagem,Versão Linguagem,Bibliotecas Linguagem,Frameworks Linguagem
+a,ED,c,d,e

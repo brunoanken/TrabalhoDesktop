@@ -45,8 +45,8 @@ public class CadDesenvolvedora extends javax.swing.JFrame {
         jTextFieldBibliotecas = new javax.swing.JTextField();
         jTextFieldFrameworks = new javax.swing.JTextField();
         jButtonCadastrar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setLocationByPlatform(true);
@@ -88,17 +88,17 @@ public class CadDesenvolvedora extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Ler .txt");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         jButton2.setText("Cadastrar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Cadastrar bin");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
             }
         });
 
@@ -111,7 +111,7 @@ public class CadDesenvolvedora extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelGuia)
-                        .addContainerGap(192, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton2)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -132,11 +132,10 @@ public class CadDesenvolvedora extends javax.swing.JFrame {
                                     .addComponent(jTextFieldBibliotecas)
                                     .addComponent(jTextFieldFrameworks)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButton3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButtonCadastrar)))
-                        .addGap(35, 35, 35)
-                        .addComponent(jButton1)
-                        .addGap(29, 29, 29))))
+                        .addGap(133, 133, 133))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,8 +168,8 @@ public class CadDesenvolvedora extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButtonCadastrar))
+                    .addComponent(jButtonCadastrar)
+                    .addComponent(jButton3))
                 .addContainerGap())
         );
 
@@ -207,16 +206,6 @@ public class CadDesenvolvedora extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldFrameworksActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        DesenvolvedoraDAO devDao = new DesenvolvedoraDAO();
-        try {
-            int tam = devDao.ler();
-            String a[][] = devDao.retornaTexto(tam);            
-        } catch (IOException ex) {
-            Logger.getLogger(CadDesenvolvedora.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Desenvolvedora dev = new Desenvolvedora();
         
@@ -232,14 +221,27 @@ public class CadDesenvolvedora extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        Desenvolvedora dev = new Desenvolvedora();
+        
+        dev.setName(jTextFieldNome.getText());
+        dev.setOrigin(jTextFieldPais.getText());
+        dev.setFoundation(jTextFieldFundacao.getText());
+        dev.setBibliotecas(jTextFieldBibliotecas.getText());
+        dev.setFrameworks(jTextFieldFrameworks.getText());
+        
+        DesenvolvedoraDAO devDao = new DesenvolvedoraDAO();
+        devDao.salvarBinario(dev);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonCadastrar;
     private javax.swing.JLabel jLabelBiblioteca;
     private javax.swing.JLabel jLabelData;

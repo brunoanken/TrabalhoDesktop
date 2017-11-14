@@ -5,6 +5,10 @@
  */
 package view;
 
+import controller.ProdutoDAO;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Produto;
 
 /**
@@ -39,6 +43,7 @@ public class CadBIblioteca extends javax.swing.JFrame {
         jTextFieldVersao = new javax.swing.JTextField();
         jTextFieldLinguagens = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -67,6 +72,13 @@ public class CadBIblioteca extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Cadastrar .txt");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -87,7 +99,8 @@ public class CadBIblioteca extends javax.swing.JFrame {
                             .addComponent(jTextFieldVersao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextFieldData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addContainerGap(126, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -113,7 +126,9 @@ public class CadBIblioteca extends javax.swing.JFrame {
                     .addComponent(jTextFieldLinguagens, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
@@ -129,7 +144,29 @@ public class CadBIblioteca extends javax.swing.JFrame {
         bib.setLanguages(jTextFieldLinguagens.getText());
         bib.setTipo("Biblioteca");
         
+        ProdutoDAO pDao = new ProdutoDAO();
+                
+        pDao.inserir(bib);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Produto frame = new Produto();
+        
+        frame.setName(jTextFieldNome.getText());
+        frame.setRelease(jTextFieldData.getText());
+        frame.setStable(jTextFieldVersao.getText());
+        frame.setLanguages(jTextFieldLinguagens.getText());
+        frame.setTipo("Biblioteca");
+        
+        ProdutoDAO pDao = new ProdutoDAO();
+        
+        try {
+            pDao.criarArquivo(frame);
+        } catch (IOException ex) {
+            Logger.getLogger(CadFramework.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -168,6 +205,7 @@ public class CadBIblioteca extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

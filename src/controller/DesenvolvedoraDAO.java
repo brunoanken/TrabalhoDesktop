@@ -120,37 +120,97 @@ public class DesenvolvedoraDAO {
     
    //binário
     
-    public void testeBinario(){
+    public void deletarBinario(){
+        File f = new File("devs.obj");
+        f.delete();
+    }
+    
+    public void salvarBinario(Desenvolvedora dev){
         FileOutputStream fos;
-        Desenvolvedora dev = new Desenvolvedora();
-        dev.setName("A");
-        dev.setBibliotecas("Bib");
-        dev.setFoundation("Foundation");
-        dev.setFrameworks("Frame");
-        dev.setOrigin("Amanhã");
-        try {
-            fos = new FileOutputStream(new File("devs.obj"));
-            ObjectOutputStream out = new ObjectOutputStream(fos);
-            out.writeObject(dev);
-            
-            ObjectInputStream ois = null;
-            try{
-                FileInputStream fis = new FileInputStream(new File("devs.obj"));
-                ois = new ObjectInputStream(fis);
-                Desenvolvedora aux = (Desenvolvedora)ois.readObject();
-                System.out.println(aux.getFrameworks());
-            } catch(FileNotFoundException ex) {
-                System.out.println("deu ruim ao ler o arquivo");
-            } catch (ClassNotFoundException ex) {
-                System.out.println("deu ruim ao ler o objeto");
+        ArrayList<Desenvolvedora> devs = lerBinario();
+        //se o retorno de lerBinario() for null
+        
+        if(devs == null){
+            try {
+                fos = new FileOutputStream("devs.obj");
+                ObjectOutputStream out = new ObjectOutputStream(fos);
+                out.writeObject(dev);
+                System.out.println("Dados salvos com sucesso");
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(DesenvolvedoraDAO.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
                 Logger.getLogger(DesenvolvedoraDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(DesenvolvedoraDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(DesenvolvedoraDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } else {
+            //se tudo correr bem
+            devs.add(dev);
+
+            try{
+                fos = new FileOutputStream("devs.obj");
+                ObjectOutputStream out = new ObjectOutputStream(fos);
+                out.writeObject(devs);
+                System.out.println("Dados salvos com sucesso");
+                devs = lerBinario();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(DesenvolvedoraDAO.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(DesenvolvedoraDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }     
         }
         
+           
+    }
+    
+    //lê o arquivo binário
+    public ArrayList<Desenvolvedora> lerBinario(){
+         ObjectInputStream ois = null;
+         ArrayList<Desenvolvedora> devs = new ArrayList<Desenvolvedora>();
+         
+//         File arquivo = new File("devs.obj");
+//        try {
+//            arquivo.createNewFile();
+//        } catch (IOException ex) {
+//            Logger.getLogger(DesenvolvedoraDAO.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        
+        try {
+            FileInputStream fis = new FileInputStream("devs.obj");
+            try{
+                devs = (ArrayList<Desenvolvedora>) ois.readObject();
+            } catch (IOException ex){
+                devs.add((Desenvolvedora) ois.readObject());
+                System.out.println("aqui");
+                return devs;
+            }            
+            for(int i = 0; i < devs.size(); i++){
+                System.out.println(devs.get(i).getName());
+            }
+            return devs;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DesenvolvedoraDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            devs = null;
+            return devs;
+        } catch (IOException ex) {
+            devs = null;
+            return devs;
+        }
+        return null;
+    }
+    
+    public String[][] binObj(ArrayList<Desenvolvedora> devs){
+        if(devs == null){
+            System.out.println("binObj devs == null");
+        }
+        String[][] dados = new String[devs.size()][];
+        for(int i = 0; i < devs.size(); i++){
+            String aux[] = {
+                devs.get(i).getName(), devs.get(i).getOrigin(), devs.get(i).getFoundation(),
+                devs.get(i).getBibliotecas(), devs.get(i).getFrameworks()
+            };
+            dados[i] = aux;
+        }        
+        return dados;
     }
     
     
@@ -230,6 +290,7 @@ public class DesenvolvedoraDAO {
         return stringArray;
     }
     
+    //realiza a inserção de dados novos no BD
     public void inserir(Desenvolvedora dev){
         try {
             
@@ -258,6 +319,7 @@ public class DesenvolvedoraDAO {
         }
     }
     
+    //deleta os dados do BD
     public void deletar(int id){
         try{
             acessaBD();
@@ -276,6 +338,7 @@ public class DesenvolvedoraDAO {
         }
     }
     
+    //atualiza os dados no BD
     public void atualizar(String[] dado){
         try {
             acessaBD();
