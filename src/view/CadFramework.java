@@ -18,9 +18,7 @@ import model.Produto;
  */
 public class CadFramework extends javax.swing.JFrame {
 
-    /**
-     * Creates new form CadFramework
-     */
+    
     public CadFramework() {
         initComponents();
     }
@@ -136,7 +134,7 @@ public class CadFramework extends javax.swing.JFrame {
         frame.setLanguages(jTextFieldLinguagens.getText());
         frame.setTipo("Framework");
         
-         ProdutoDAO devDao = new ProdutoDAO();
+         ProdutoDAO devDao = new ProdutoDAO(1);
         
         devDao.inserir(frame);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -171,9 +169,7 @@ public class CadFramework extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CadFramework().setVisible(true);
-                
-                
+                new CadFramework().setVisible(true);                
             }
         });
     }

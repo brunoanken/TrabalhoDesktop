@@ -13,7 +13,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Desenvolvedora;
@@ -262,7 +264,7 @@ public class LinguagemProgramacaoDAO {
 //        Map params = new HashMap();
 //        params.put("query_nome", new String("%Python%"));        
         
-        String src = "src/reports/dev_geral.jasper";
+        String src = "src/reports/linguagem_geral.jasper";
         
         JasperPrint jasperPrint = null;
         
@@ -277,6 +279,30 @@ public class LinguagemProgramacaoDAO {
         
         view.setVisible(true);
         
+    }
+    
+    //cria um PDF com busca por nome
+    public void createPDFnome(String nome){
+        
+        acessaBD();
+        
+        Map params = new HashMap();
+        params.put("query_nome", new String("%" + nome + "%"));
+        
+        String src = "src/reports/linguagem_nome.jasper";
+        
+        JasperPrint jasperPrint = null;
+        
+        try {
+            jasperPrint = JasperFillManager.fillReport(src, params, connection);
+        } catch (JRException ex) {
+            System.out.println("Erro jasperPrint\n");
+            Logger.getLogger(DesenvolvedoraDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        JasperViewer view = new JasperViewer(jasperPrint, false);
+        
+        view.setVisible(true);        
     }
     
 }

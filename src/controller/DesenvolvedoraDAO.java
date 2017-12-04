@@ -369,5 +369,30 @@ public class DesenvolvedoraDAO {
         view.setVisible(true);
         
     }
+    
+    //cria um PDF com busca por nome
+    public void createPDFnome(String nome){
+        
+        acessaBD();
+        
+        Map params = new HashMap();
+        params.put("query_name", new String("%" + nome + "%"));
+        
+        String src = "src/reports/desenvolvedora_nome.jasper";
+        
+        JasperPrint jasperPrint = null;
+        
+        try {
+            jasperPrint = JasperFillManager.fillReport(src, params, connection);
+        } catch (JRException ex) {
+            System.out.println("Erro jasperPrint\n");
+            Logger.getLogger(DesenvolvedoraDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        JasperViewer view = new JasperViewer(jasperPrint, false);
+        
+        view.setVisible(true);        
+    }
+    
 
 }

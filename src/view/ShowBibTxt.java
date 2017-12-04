@@ -34,7 +34,7 @@ public class ShowBibTxt {
             @Override
             public void actionPerformed(ActionEvent e) {
                 
-                ProdutoDAO devDao = new ProdutoDAO();
+                ProdutoDAO devDao = new ProdutoDAO(0);
                 ArrayList<Produto> devs = new ArrayList<Produto>();
                 
                 //lê todas as linhas e verifica se o nome está vazio

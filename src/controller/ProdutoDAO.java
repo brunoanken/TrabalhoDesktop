@@ -13,11 +13,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.LinguagemProgramacao;
 import model.Produto;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class ProdutoDAO {
     private ArrayList<Produto> lings = new ArrayList<Produto>();
@@ -25,6 +31,12 @@ public class ProdutoDAO {
     
     private Connection connection = null;
     private PreparedStatement pstdados = null;
+    
+    int bibframe;
+    
+    public ProdutoDAO(int bibframe){
+        this.bibframe = bibframe;
+    }
     
     public void criarArquivo(Produto ling) throws IOException{
         this.ler();
@@ -137,7 +149,9 @@ public class ProdutoDAO {
     
     //1 = framework
     //resto = biblioteca
-    public String[][] lerBD(int tipo){
+    public String[][] lerBD(){
+        
+        System.out.println("lerbd tipo = " + bibframe);
         
         acessaBD();
                 
@@ -147,7 +161,7 @@ public class ProdutoDAO {
         String[][] stringArray = null;
                 
         try{
-            if(tipo == 1){
+            if(bibframe == 1){
                 pst = connection.prepareStatement("SELECT * FROM produtos WHERE tipo='Framework'");
             } else {
                 pst = connection.prepareStatement("SELECT * FROM produtos WHERE tipo='Biblioteca'");
@@ -251,5 +265,70 @@ public class ProdutoDAO {
         } catch (SQLException ex) {
             Logger.getLogger(DesenvolvedoraDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    //cria um PDF geral
+    // 1 = framework
+    // resto = biblioteca
+    public void createPDF(){
+        
+        acessaBD();
+        
+//        Map params = new HashMap();
+//        params.put("query_nome", new String("%Python%"));        
+        
+        String src = null;
+        
+        System.out.println("tipo = " + bibframe);
+        if(bibframe == 1){
+            src = "src/reports/framework_geral.jasper";
+        } else {
+            src = "src/reports/biblioteca_geral.jasper";
+        }
+        
+        
+        JasperPrint jasperPrint = null;
+        
+        try {
+            jasperPrint = JasperFillManager.fillReport(src, null, connection);
+        } catch (JRException ex) {
+            System.out.println("Erro jasperPrint\n");
+            Logger.getLogger(DesenvolvedoraDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        JasperViewer view = new JasperViewer(jasperPrint, false);
+        
+        view.setVisible(true);
+        
+    }
+    
+    //cria um PDF com busca por nome
+    public void createPDFnome(String nome){
+        
+        acessaBD();
+        
+        Map params = new HashMap();
+        params.put("query_name", new String("%" + nome + "%"));
+        
+        if(bibframe == 1){
+            params.put("query_tipo", new String("Framework"));
+        } else {
+            params.put("query_tipo", new String("Biblioteca"));
+        }
+        
+        String src = "src/reports/produto_nome.jasper";
+        
+        JasperPrint jasperPrint = null;
+        
+        try {
+            jasperPrint = JasperFillManager.fillReport(src, params, connection);
+        } catch (JRException ex) {
+            System.out.println("Erro jasperPrint\n");
+            Logger.getLogger(DesenvolvedoraDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        JasperViewer view = new JasperViewer(jasperPrint, false);
+        
+        view.setVisible(true);        
     }
 }

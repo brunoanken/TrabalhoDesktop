@@ -22,10 +22,12 @@ public class ShowLinguagem {
         JTable EndTable = new JTable(conteudo, cabecalho);
         JFrame frame = new JFrame("Linguagens de Programação");
         
+        int height = EndTable.getRowHeight() * (EndTable.getRowCount() + 2);
+        
         //botão para o cadastro de novas entradas
         JButton cadastro = new JButton("Novo cadastro");
         cadastro.setVisible(true);
-        cadastro.setBounds(100, 100, 100, 100);
+        cadastro.setBounds(0, height, 150, 50);
         frame.getContentPane().add(cadastro);
         
         cadastro.addActionListener(new ActionListener(){
@@ -39,19 +41,33 @@ public class ShowLinguagem {
         //botão para gerar um relatório geral
         JButton relatorioGeral = new JButton("Gerar Relatório Geral");
         relatorioGeral.setVisible(true);
-        relatorioGeral.setBounds(200, 100, 100, 100);
+        relatorioGeral.setBounds(150, height, 150, 50);
         frame.getContentPane().add(relatorioGeral);
         
         relatorioGeral.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent ae) {
-                new DesenvolvedoraDAO().createPDF();
+                new LinguagemProgramacaoDAO().createPDF();
             }
         });    
         
+        //botão para gerar um relatório com procura por nome
+        JButton relatorioNome = new JButton("Relatório por Nome");
+        relatorioNome.setVisible(true);
+        relatorioNome.setBounds(300, height, 150, 50);
+        frame.getContentPane().add(relatorioNome);
+        
+        relatorioNome.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                new ReportLinguagem(1).setVisible(true);
+            }
+        });  
+        
+        //botão para salvar as alterações realizadas na tabela
         JButton salvarBD = new JButton("Salvar");
         salvarBD.setVisible(true);
-        salvarBD.setBounds(100,200,190,60);
+        salvarBD.setBounds(150, height + 50, 150, 50);
         frame.getContentPane().add(salvarBD);
         
         salvarBD.addActionListener(new ActionListener(){
@@ -67,10 +83,8 @@ public class ShowLinguagem {
                         System.out.println(conteudo[i][0]);
                         devDao.atualizar(conteudo[i]);
                     }
-                }
-                    
-            }
-            
+                }                    
+            }            
         });
         
         frame.getContentPane().add(new JScrollPane(EndTable));

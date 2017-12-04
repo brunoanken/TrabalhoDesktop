@@ -126,7 +126,7 @@ public class CadBIblioteca extends javax.swing.JFrame {
         bib.setLanguages(jTextFieldLinguagens.getText());
         bib.setTipo("Biblioteca");
         
-        ProdutoDAO pDao = new ProdutoDAO();
+        ProdutoDAO pDao = new ProdutoDAO(0);
                 
         pDao.inserir(bib);
         
