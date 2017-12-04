@@ -44,14 +44,13 @@ public class CadDesenvolvedora extends javax.swing.JFrame {
         jTextFieldFundacao = new javax.swing.JTextField();
         jTextFieldBibliotecas = new javax.swing.JTextField();
         jTextFieldFrameworks = new javax.swing.JTextField();
-        jButtonCadastrar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setLocationByPlatform(true);
 
-        jLabelGuia.setText("Cadastro de Desenvolvedor");
+        jLabelGuia.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabelGuia.setText("Cadastro de Empresa Desenvolvedora");
 
         jLabelNome.setText("Nome:");
 
@@ -81,24 +80,10 @@ public class CadDesenvolvedora extends javax.swing.JFrame {
             }
         });
 
-        jButtonCadastrar.setText("Cadastrar .txt");
-        jButtonCadastrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCadastrarActionPerformed(evt);
-            }
-        });
-
         jButton2.setText("Cadastrar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
-            }
-        });
-
-        jButton3.setText("Cadastrar bin");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
             }
         });
 
@@ -110,14 +95,11 @@ public class CadDesenvolvedora extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelGuia)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton2)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabelData)
                                     .addComponent(jLabelBiblioteca)
@@ -126,16 +108,15 @@ public class CadDesenvolvedora extends javax.swing.JFrame {
                                     .addComponent(jLabelNome))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldNome)
-                                    .addComponent(jTextFieldPais)
                                     .addComponent(jTextFieldFundacao)
-                                    .addComponent(jTextFieldBibliotecas)
-                                    .addComponent(jTextFieldFrameworks)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jButton3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButtonCadastrar)))
-                        .addGap(133, 133, 133))))
+                                    .addComponent(jTextFieldPais)
+                                    .addComponent(jTextFieldNome, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jTextFieldFrameworks)
+                                    .addComponent(jTextFieldBibliotecas, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelGuia)
+                                .addGap(0, 16, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,13 +145,7 @@ public class CadDesenvolvedora extends javax.swing.JFrame {
                     .addComponent(jTextFieldFrameworks, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
-                .addGap(0, 92, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonCadastrar)
-                    .addComponent(jButton3))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -183,24 +158,6 @@ public class CadDesenvolvedora extends javax.swing.JFrame {
     private void jTextFieldPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPaisActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldPaisActionPerformed
-
-    private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
-        Desenvolvedora dev = new Desenvolvedora();
-        
-        dev.setName(jTextFieldNome.getText());
-        dev.setOrigin(jTextFieldPais.getText());
-        dev.setFoundation(jTextFieldFundacao.getText());
-        dev.setBibliotecas(jTextFieldBibliotecas.getText());
-        dev.setFrameworks(jTextFieldFrameworks.getText());
-        
-        DesenvolvedoraDAO devDao = new DesenvolvedoraDAO();        
-        try{
-            System.out.println("Escrevendo em arquivo de texto");
-            devDao.criarArquivo(dev);
-        } catch (IOException erro){
-            System.out.println(erro);
-        }
-    }//GEN-LAST:event_jButtonCadastrarActionPerformed
 
     private void jTextFieldFrameworksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldFrameworksActionPerformed
         // TODO add your handling code here:
@@ -221,19 +178,6 @@ public class CadDesenvolvedora extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        Desenvolvedora dev = new Desenvolvedora();
-        
-        dev.setName(jTextFieldNome.getText());
-        dev.setOrigin(jTextFieldPais.getText());
-        dev.setFoundation(jTextFieldFundacao.getText());
-        dev.setBibliotecas(jTextFieldBibliotecas.getText());
-        dev.setFrameworks(jTextFieldFrameworks.getText());
-        
-        DesenvolvedoraDAO devDao = new DesenvolvedoraDAO();
-        devDao.salvarBinario(dev);
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -241,8 +185,6 @@ public class CadDesenvolvedora extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButtonCadastrar;
     private javax.swing.JLabel jLabelBiblioteca;
     private javax.swing.JLabel jLabelData;
     private javax.swing.JLabel jLabelFramework;

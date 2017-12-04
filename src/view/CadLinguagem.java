@@ -44,12 +44,12 @@ public class CadLinguagem extends javax.swing.JFrame {
         jTextFieldVersao = new javax.swing.JTextField();
         jTextFieldBib = new javax.swing.JTextField();
         jTextFieldFrame = new javax.swing.JTextField();
-        jButtonCadastrar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Linguagem de Programação");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setText("Cadastro de Linguagem de Programação");
 
         jLabel2.setText("Nome");
 
@@ -60,23 +60,6 @@ public class CadLinguagem extends javax.swing.JFrame {
         jLabel5.setText("Bibliotecas");
 
         jLabel6.setText("Frameworks");
-
-        jTextFieldData.setText("Data Linguagem");
-
-        jTextFieldNome.setText("Nome Linguagem");
-
-        jTextFieldVersao.setText("Versão Linguagem");
-
-        jTextFieldBib.setText("Bibliotecas Linguagem");
-
-        jTextFieldFrame.setText("Frameworks Linguagem");
-
-        jButtonCadastrar.setText("Cadastrar .txt");
-        jButtonCadastrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCadastrarActionPerformed(evt);
-            }
-        });
 
         jButton1.setText("Cadastrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -90,11 +73,8 @@ public class CadLinguagem extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jButtonCadastrar)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,13 +85,13 @@ public class CadLinguagem extends javax.swing.JFrame {
                             .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldBib, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldVersao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTextFieldNome)
+                            .addComponent(jTextFieldData)
+                            .addComponent(jTextFieldVersao)
+                            .addComponent(jTextFieldBib)
+                            .addComponent(jTextFieldFrame)))
                     .addComponent(jButton1))
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,32 +120,11 @@ public class CadLinguagem extends javax.swing.JFrame {
                     .addComponent(jTextFieldFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addComponent(jButtonCadastrar)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
-        LinguagemProgramacao linguagem = new LinguagemProgramacao();
-        
-        linguagem.setNome(jTextFieldNome.getText());
-        linguagem.setRelease(jTextFieldData.getText());
-        linguagem.setStable(jTextFieldVersao.getText());
-        linguagem.setLibraries(jTextFieldBib.getText());
-        linguagem.setFrameworks(jTextFieldFrame.getText());
-        
-        LinguagemProgramacaoDAO lDao = new LinguagemProgramacaoDAO();
-        
-        try {
-            lDao.criarArquivo(linguagem);
-        } catch (IOException ex) {
-            Logger.getLogger(CadLinguagem.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }//GEN-LAST:event_jButtonCadastrarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         LinguagemProgramacao linguagem = new LinguagemProgramacao();
@@ -218,7 +177,6 @@ public class CadLinguagem extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButtonCadastrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

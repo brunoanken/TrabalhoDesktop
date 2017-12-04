@@ -35,17 +35,16 @@
                           <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jTextFieldLinguagens" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldVersao" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldNome" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldData" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jTextFieldLinguagens" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jTextFieldVersao" alignment="0" pref="106" max="32767" attributes="0"/>
+                          <Component id="jTextFieldData" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jTextFieldNome" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="jButton1" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton2" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="126" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -76,9 +75,7 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="25" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -86,7 +83,10 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Biblioteca"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="11" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Cadastro de Biblioteca"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
@@ -110,24 +110,12 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldData">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Data Bib"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldNome">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Nome Bib"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldVersao">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Vers&#xe3;o Bib"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldLinguagens">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Linguagens Bib"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
@@ -135,14 +123,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Cadastrar .txt"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

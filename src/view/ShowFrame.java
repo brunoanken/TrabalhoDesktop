@@ -22,6 +22,20 @@ public class ShowFrame {
         JTable EndTable = new JTable(conteudo, cabecalho);
         JFrame frame = new JFrame("Frameworks");
         
+        //botão para o cadastro de novas entradas
+        JButton cadastro = new JButton("Novo cadastro");
+        cadastro.setVisible(true);
+        cadastro.setBounds(100, 100, 100, 100);
+        frame.getContentPane().add(cadastro);
+        
+        cadastro.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                new CadBIblioteca().setVisible(true); 
+            }            
+        });
+        
         JButton salvarBD = new JButton("Salvar");
         salvarBD.setVisible(true);
         salvarBD.setBounds(100,200,190,60);

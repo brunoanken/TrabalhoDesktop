@@ -1,0 +1,56 @@
+-- Table: public.desenvolvedoras
+
+-- DROP TABLE public.desenvolvedoras;
+
+CREATE TABLE public.desenvolvedoras
+(
+  id integer NOT NULL DEFAULT nextval('desenvolvedoras_id_seq'::regclass),
+  name character varying(100),
+  origin character varying(100),
+  foundation character varying(100),
+  bibliotecas character varying(500),
+  frameworks character varying(500)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.desenvolvedoras
+  OWNER TO postgres;
+
+-- Table: public.linguagens
+
+-- DROP TABLE public.linguagens;
+
+CREATE TABLE public.linguagens
+(
+  id integer NOT NULL DEFAULT nextval('linguagens_id_seq'::regclass),
+  nome character varying(100),
+  release character varying(100),
+  stable character varying(100),
+  libraries character varying(100),
+  frameworks character varying(100)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.linguagens
+  OWNER TO postgres;
+
+-- Table: public.produtos
+
+-- DROP TABLE public.produtos;
+
+CREATE TABLE public.produtos
+(
+  id integer NOT NULL DEFAULT nextval('produtos_id_seq'::regclass),
+  name character varying(100),
+  release character varying(100),
+  stable character varying(100),
+  language character varying(100),
+  tipo character varying(100)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.produtos
+  OWNER TO postgres;

@@ -30,7 +30,32 @@ public class ShowDev {
         
         JTable EndTable = new JTable(conteudo, cabecalho);
         JFrame frame = new JFrame("Desenvolvedoras");
-                
+        
+        //botão para o cadastro de novas entradas
+        JButton cadastro = new JButton("Novo cadastro");
+        cadastro.setVisible(true);
+        cadastro.setBounds(100, 100, 100, 100);
+        frame.getContentPane().add(cadastro);
+        
+        cadastro.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                new CadDesenvolvedora().setVisible(true); 
+            }
+        });
+        
+        //botão para gerar um relatório geral
+        JButton relatorioGeral = new JButton("Gerar Relatório Geral");
+        relatorioGeral.setVisible(true);
+        relatorioGeral.setBounds(200, 100, 100, 100);
+        frame.getContentPane().add(relatorioGeral);
+        
+        relatorioGeral.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                new DesenvolvedoraDAO().createPDF();
+            }
+        });                
         
         //botão que executa as ações para o BD
         JButton salvarBD = new JButton("Salvar");

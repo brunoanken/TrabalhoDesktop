@@ -18,6 +18,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Desenvolvedora;
 import model.LinguagemProgramacao;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class LinguagemProgramacaoDAO {
     
@@ -248,6 +252,31 @@ public class LinguagemProgramacaoDAO {
         } catch (SQLException ex) {
             Logger.getLogger(DesenvolvedoraDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    //cria um PDF geral
+    public void createPDF(){
+        
+        acessaBD();
+        
+//        Map params = new HashMap();
+//        params.put("query_nome", new String("%Python%"));        
+        
+        String src = "src/reports/dev_geral.jasper";
+        
+        JasperPrint jasperPrint = null;
+        
+        try {
+            jasperPrint = JasperFillManager.fillReport(src, null, connection);
+        } catch (JRException ex) {
+            System.out.println("Erro jasperPrint\n");
+            Logger.getLogger(DesenvolvedoraDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        JasperViewer view = new JasperViewer(jasperPrint, false);
+        
+        view.setVisible(true);
+        
     }
     
 }

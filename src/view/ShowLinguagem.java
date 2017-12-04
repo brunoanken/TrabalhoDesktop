@@ -14,14 +14,40 @@ import model.Desenvolvedora;
 public class ShowLinguagem {
     
     private static ArrayList<Desenvolvedora> devs;
-    private static String cabecalho[] = {"Nome", "Data de Lançamento", 
-        "Versão Estável", "Bibliotecas", "Frameworks"};
+    private static String cabecalho[] = {"Nome", "Data de Lançamento", "Versão Estável"};
     private static String[][] dadosTabela;
     
     public ShowLinguagem(String[][] conteudo){
         System.out.println(conteudo[0][4]);
         JTable EndTable = new JTable(conteudo, cabecalho);
         JFrame frame = new JFrame("Linguagens de Programação");
+        
+        //botão para o cadastro de novas entradas
+        JButton cadastro = new JButton("Novo cadastro");
+        cadastro.setVisible(true);
+        cadastro.setBounds(100, 100, 100, 100);
+        frame.getContentPane().add(cadastro);
+        
+        cadastro.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                new CadLinguagem().setVisible(true); 
+            }            
+        });
+        
+        //botão para gerar um relatório geral
+        JButton relatorioGeral = new JButton("Gerar Relatório Geral");
+        relatorioGeral.setVisible(true);
+        relatorioGeral.setBounds(200, 100, 100, 100);
+        frame.getContentPane().add(relatorioGeral);
+        
+        relatorioGeral.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                new DesenvolvedoraDAO().createPDF();
+            }
+        });    
         
         JButton salvarBD = new JButton("Salvar");
         salvarBD.setVisible(true);
